@@ -1,9 +1,45 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body>
+<body class="container">
 
 <h1>Hello, world!</h1>
+
+<form method="post" th:object="${performer}">
+    <div class="form-group">
+        <label th:for="name">Name</label>
+        <input class="form-control" th:field="*{name}" />
+        <span th:errors="*{name}" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label th:for="position">Position</label>
+        <input class="form-control" th:field="*{position}" />
+        <span th:errors="*{position}" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label th:for="timeAllotted">Time Allotted</label>
+        <input class="form-control" th:field="*{timeAllotted}" />
+        <span th:errors="*{timeAllotted}" class="error"></span>
+    </div>
+
+    <input type="submit" value="Add Performer" />
+</form>
+
+<table class="table">
+
+    <tr>
+        <th>Position</th>
+        <th>Name</th>
+        <th>Time Allotted</th>
+    </tr>
+
+    <tr th:each="performer : ${performers}">
+        <td th:text="${performer.position}"></td>
+        <td th:text="${performer.name}"></td>
+        <td th:text="${performer.timeAllotted}"></td>
+    </tr>
+
+</table>
 
 </body>
 </html>
