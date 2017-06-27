@@ -2,6 +2,9 @@ package com.andrewmihalevich.models;
 
 
 
+// import sun.misc.Perf;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,7 +15,7 @@ import javax.validation.constraints.Size;
  * Created by AndrewM on 6/20/2017.
  */
 @Entity
-public class Performer {
+public class Performer implements Comparable<Performer> {
 
     @Id
     @GeneratedValue
@@ -23,6 +26,7 @@ public class Performer {
     private String name;
 
     @NotNull
+    // @Column(unique = true)
     private int position;
 
     @NotNull
@@ -62,5 +66,13 @@ public class Performer {
 
     public void setTimeAllotted(int timeAllotted) {
         this.timeAllotted = timeAllotted;
+    }
+
+    public int compareTo(Performer comparePerformer) {
+        int compareQuantity = comparePerformer.getPosition();
+
+        return this.position - compareQuantity;
+
+
     }
 }

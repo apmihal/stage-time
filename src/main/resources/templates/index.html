@@ -3,7 +3,7 @@
 <head th:replace="fragments :: head"></head>
 <body class="container">
 
-<h1>Hello, world!</h1>
+<h1>Stage Time</h1>
 
 <form method="post" th:object="${performer}">
     <div class="form-group">
@@ -13,7 +13,8 @@
     </div>
     <div class="form-group">
         <label th:for="position">Position</label>
-        <input class="form-control" th:field="*{position}" />
+        <!--<input class="form-control" th:field="*{position}" />-->
+        <input class="form-control" th:value="${nextPosition}" th:name="position" th:id="position" />
         <span th:errors="*{position}" class="error"></span>
     </div>
     <div class="form-group">
@@ -25,18 +26,22 @@
     <input type="submit" value="Add Performer" />
 </form>
 
+<p th:if="${testError}" th:text="${testError}"></p>
+
 <table class="table">
 
     <tr>
         <th>Position</th>
         <th>Name</th>
         <th>Time Allotted</th>
+        <th>Id</th>
     </tr>
 
     <tr th:each="performer : ${performers}">
         <td th:text="${performer.position}"></td>
         <td th:text="${performer.name}"></td>
         <td th:text="${performer.timeAllotted}"></td>
+        <td th:text="${performer.id}"></td>
     </tr>
 
 </table>
