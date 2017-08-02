@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
  * Created by AndrewM on 6/20/2017.
  */
 @Entity
-public class Performer implements Comparable<Performer> {
+public class Performer {
 
     @Id
     @GeneratedValue

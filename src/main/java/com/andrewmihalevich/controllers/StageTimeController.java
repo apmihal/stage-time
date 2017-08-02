@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -59,6 +60,7 @@ public class StageTimeController {
             //model.addAttribute("testError", "someone is already at this position");
 
             // Get list of performers with position greater than or equal to newPerformer position
+            // Updates positions of performers below new performer
             Iterable<Performer> performers = performerDao.findByPositionGreaterThan(newPerformer.getPosition() - 1);
             ArrayList<Performer> updatedPerformers = new ArrayList<>();
             for (Performer p : performers) {
@@ -80,4 +82,23 @@ public class StageTimeController {
         performerDao.save(newPerformer);
         return "redirect:";
     }
+
+    @RequestMapping(value = "edit/{id}", method = RequestMethod.GET)
+    public String edit(Model model, @PathVariable int id) {
+        model.addAttribute("message", id);
+        model.addAttribute("performer", performerDao.findById(id));
+
+        return "edit";
+    }
+
+    @RequestMapping(value = "edit/{id}", method = RequestMethod.POST)
+    public String edit(@PathVariable int id,
+                       @ModelAttribute @Valid Performer newPerformer,
+                       Errors errors,
+                       Model model) {
+
+        return "redirect:..";
+    }
 }
+
+

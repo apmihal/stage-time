@@ -42,6 +42,7 @@
         <td th:text="${performer.name}"></td>
         <td th:text="${performer.timeAllotted}"></td>
         <td th:text="${performer.id}"></td>
+        <td><a th:href="@{/edit/{id}(id=${performer.id})}">edit</a></td>
     </tr>
 
 </table>
