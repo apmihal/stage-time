@@ -97,6 +97,17 @@ public class StageTimeController {
                        Errors errors,
                        Model model) {
 
+        if (errors.hasErrors()) {
+            return "edit/" + id;
+        }
+
+        Performer performerToUpdate = performerDao.findById(id);
+
+        performerToUpdate.setName(newPerformer.getName());
+        performerToUpdate.setTimeAllotted(newPerformer.getTimeAllotted());
+        performerDao.save(performerToUpdate);
+
+
         return "redirect:..";
     }
 }
