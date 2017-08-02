@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<table class="table">
+
+    <tr>
+        <th>Position</th>
+        <th>Name</th>
+        <th>Time Allotted</th>
+        <th>Id</th>
+    </tr>
+
+    <tr th:each="performer : ${performers}">
+        <td th:text="${performer.position}"></td>
+        <td th:text="${performer.name}"></td>
+        <td th:text="${performer.timeAllotted}"></td>
+        <td th:text="${performer.id}"></td>
+        <td><a th:href="@{/edit/{id}(id=${performer.id})}">edit</a></td>
+    </tr>
+
+</table>
+
+</body>
+</html>

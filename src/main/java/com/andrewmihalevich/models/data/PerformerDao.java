@@ -13,5 +13,6 @@ public interface PerformerDao extends CrudRepository<Performer, Integer> {
     public List<Performer> findByPositionGreaterThan(int position);
     public List<Performer> findAllByOrderByPositionAsc();
     public Performer findById(int id);
+    public List<Performer> findAllByPositionBetween(int start, int end);
 
 }

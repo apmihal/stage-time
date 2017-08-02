@@ -105,10 +105,53 @@ public class StageTimeController {
 
         performerToUpdate.setName(newPerformer.getName());
         performerToUpdate.setTimeAllotted(newPerformer.getTimeAllotted());
+
+        if (performerToUpdate.getPosition() != newPerformer.getPosition()) {
+
+            if (performerToUpdate.getPosition() > newPerformer.getPosition()) {
+                // If the updated position is higher up the list (a lower number)
+                Iterable<Performer> performers = performerDao.findAllByPositionBetween(newPerformer.getPosition(), performerToUpdate.getPosition() - 1);
+                ArrayList<Performer> updatedPerformers = new ArrayList<>();
+                for (Performer p : performers) {
+                    p.setPosition(p.getPosition() + 1);
+                    // performerDao.save(p);
+                    updatedPerformers.add(p);
+                }
+
+                for (Performer p : updatedPerformers) {
+                    performerDao.save(p);
+                }
+
+                performerToUpdate.setPosition(newPerformer.getPosition());
+
+            } else {
+                // If the updated position is lower on the list (a higher number)
+                Iterable<Performer> performers = performerDao.findAllByPositionBetween(performerToUpdate.getPosition() + 1, newPerformer.getPosition());
+                ArrayList<Performer> updatedPerformers = new ArrayList<>();
+                for (Performer p : performers) {
+                    p.setPosition(p.getPosition() - 1);
+                    // performerDao.save(p);
+                    updatedPerformers.add(p);
+                }
+
+                for (Performer p : updatedPerformers) {
+                    performerDao.save(p);
+                }
+
+                performerToUpdate.setPosition(newPerformer.getPosition());
+            }
+        }
+
         performerDao.save(performerToUpdate);
 
 
         return "redirect:..";
+    }
+
+    @RequestMapping(value = "test")
+    public String test(Model model) {
+        model.addAttribute("performers", performerDao.findAllByPositionBetween(5, 1));
+        return "test";
     }
 }
 
