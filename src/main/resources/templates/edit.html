@@ -15,33 +15,33 @@
     </tr>
 
     <tr>
-        <td th:text="${performer.position}"></td>
-        <td th:text="${performer.name}"></td>
-        <td th:text="${performer.timeAllotted}"></td>
-        <td th:text="${performer.id}"></td>
+        <td th:text="${performance.position}"></td>
+        <td th:text="${performance.name}"></td>
+        <td th:text="${performance.timeAllotted}"></td>
+        <td th:text="${performance.id}"></td>
     </tr>
 
 </table>
 
-<form method="post" th:object="${performer}">
+<form method="post" th:object="${performance}">
     <div class="form-group">
         <label th:for="name">Name</label>
-        <input class="form-control" th:value="${performer.name}" th:name="name" th:id="name" />
+        <input class="form-control" th:value="${performance.name}" th:name="name" th:id="name" />
         <span th:errors="*{name}" class="error"></span>
     </div>
     <!--Uncomment when ready to handle updated positions-->
     <div class="form-group">
         <label th:for="position">Position</label>
-        <input class="form-control" th:value="${performer.position}" th:name="position" th:id="position" />
+        <input class="form-control" th:value="${performance.position}" th:name="position" th:id="position" />
         <span th:errors="*{position}" class="error"></span>
     </div>
     <div class="form-group">
         <label th:for="timeAllotted">Time Allotted</label>
-        <input class="form-control" th:value="${performer.timeAllotted}" th:name="timeAllotted" th:id="timeAllotted" />
+        <input class="form-control" th:value="${performance.timeAllotted}" th:name="timeAllotted" th:id="timeAllotted" />
         <span th:errors="*{timeAllotted}" class="error"></span>
     </div>
 
-    <input type="submit" value="Edit Performer" />
+    <input type="submit" value="Edit Performance" />
 
 </form>
 

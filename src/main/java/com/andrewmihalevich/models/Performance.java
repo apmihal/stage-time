@@ -4,10 +4,7 @@ package com.andrewmihalevich.models;
 
 // import sun.misc.Perf;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -15,7 +12,7 @@ import javax.validation.constraints.Size;
  * Created by AndrewM on 6/20/2017.
  */
 @Entity
-public class Performer {
+public class Performance {
 
     @Id
     @GeneratedValue
@@ -32,13 +29,16 @@ public class Performer {
     @NotNull
     private int timeAllotted;
 
-    public Performer(String name, int position, int timeAllotted) {
+    // @OneToMany
+    // private Show show;
+
+    public Performance(String name, int position, int timeAllotted) {
         this.name = name;
         this.position = position;
         this.timeAllotted = timeAllotted;
     }
 
-    public Performer() { }
+    public Performance() { }
 
     public int getId() {
         return id;
@@ -68,8 +68,8 @@ public class Performer {
         this.timeAllotted = timeAllotted;
     }
 
-    public int compareTo(Performer comparePerformer) {
-        int compareQuantity = comparePerformer.getPosition();
+    public int compareTo(Performance comparePerformance) {
+        int compareQuantity = comparePerformance.getPosition();
 
         return this.position - compareQuantity;
 

@@ -1,8 +1,10 @@
 package com.andrewmihalevich.controllers;
 
 import com.andrewmihalevich.HibernateUtil;
-import com.andrewmihalevich.models.Performer;
-import com.andrewmihalevich.models.data.PerformerDao;
+import com.andrewmihalevich.models.Performance;
+import com.andrewmihalevich.models.Performance;
+import com.andrewmihalevich.models.data.PerformanceDao;
+import com.andrewmihalevich.models.data.PerformanceDao;
 import org.apache.catalina.Session;
 import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,20 +28,20 @@ import java.util.List;
 public class StageTimeController {
 
     @Autowired
-    private PerformerDao performerDao;
+    private PerformanceDao performanceDao;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(Model model) {
 
-        model.addAttribute("performers", performerDao.findAllByOrderByPositionAsc());
-        model.addAttribute("nextPosition", performerDao.count() + 1);
-        model.addAttribute(new Performer());
+        model.addAttribute("performances", performanceDao.findAllByOrderByPositionAsc());
+        model.addAttribute("nextPosition", performanceDao.count() + 1);
+        model.addAttribute(new Performance());
 
         return "index";
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public String index(@ModelAttribute @Valid Performer newPerformer,
+    public String index(@ModelAttribute @Valid Performance newPerformance,
                         Errors errors,
                         Model model) {
 
@@ -47,53 +49,39 @@ public class StageTimeController {
             return "index";
         }
 
-//        Session session = (Session) HibernateUtil.getSessionFactory().openSession();
-//
-//        Query query = session.createQuery("from Performer where position = :code ");
-//        query.setParameter("code", newPerformer.getPosition());
+        Performance performance = performanceDao.findOne(newPerformance.getPosition());
 
-
-
-        Performer performer = performerDao.findOne(newPerformer.getPosition());
-
-        if (performer != null) {
-            //model.addAttribute("testError", "someone is already at this position");
-
-            // Get list of performers with position greater than or equal to newPerformer position
-            // Updates positions of performers below new performer
-            Iterable<Performer> performers = performerDao.findByPositionGreaterThan(newPerformer.getPosition() - 1);
-            ArrayList<Performer> updatedPerformers = new ArrayList<>();
-            for (Performer p : performers) {
+        if (performance != null) {
+            // Get list of performances with position greater than or equal to newPerformance position
+            // Updates positions of performances below new performance
+            Iterable<Performance> performances = performanceDao.findByPositionGreaterThan(newPerformance.getPosition() - 1);
+            ArrayList<Performance> updatedPerformances = new ArrayList<>();
+            for (Performance p : performances) {
                 p.setPosition(p.getPosition() + 1);
-                // performerDao.save(p);
-                updatedPerformers.add(p);
+                updatedPerformances.add(p);
 
-
-                // Add 1 to their positions
             }
 
-            for (Performer p : updatedPerformers) {
-                performerDao.save(p);
+            for (Performance p : updatedPerformances) {
+                performanceDao.save(p);
             }
         }
 
-
-
-        performerDao.save(newPerformer);
+        performanceDao.save(newPerformance);
         return "redirect:";
     }
 
     @RequestMapping(value = "edit/{id}", method = RequestMethod.GET)
     public String edit(Model model, @PathVariable int id) {
         model.addAttribute("message", id);
-        model.addAttribute("performer", performerDao.findById(id));
+        model.addAttribute("performance", performanceDao.findById(id));
 
         return "edit";
     }
 
     @RequestMapping(value = "edit/{id}", method = RequestMethod.POST)
     public String edit(@PathVariable int id,
-                       @ModelAttribute @Valid Performer newPerformer,
+                       @ModelAttribute @Valid Performance newPerformance,
                        Errors errors,
                        Model model) {
 
@@ -101,56 +89,53 @@ public class StageTimeController {
             return "edit/" + id;
         }
 
-        Performer performerToUpdate = performerDao.findById(id);
+        Performance performanceToUpdate = performanceDao.findById(id);
 
-        performerToUpdate.setName(newPerformer.getName());
-        performerToUpdate.setTimeAllotted(newPerformer.getTimeAllotted());
+        performanceToUpdate.setName(newPerformance.getName());
+        performanceToUpdate.setTimeAllotted(newPerformance.getTimeAllotted());
 
-        if (performerToUpdate.getPosition() != newPerformer.getPosition()) {
+        if (performanceToUpdate.getPosition() != newPerformance.getPosition()) {
 
-            if (performerToUpdate.getPosition() > newPerformer.getPosition()) {
+            if (performanceToUpdate.getPosition() > newPerformance.getPosition()) {
                 // If the updated position is higher up the list (a lower number)
-                Iterable<Performer> performers = performerDao.findAllByPositionBetween(newPerformer.getPosition(), performerToUpdate.getPosition() - 1);
-                ArrayList<Performer> updatedPerformers = new ArrayList<>();
-                for (Performer p : performers) {
+                Iterable<Performance> performances = performanceDao.findAllByPositionBetween(newPerformance.getPosition(), performanceToUpdate.getPosition() - 1);
+                ArrayList<Performance> updatedPerformances = new ArrayList<>();
+                for (Performance p : performances) {
                     p.setPosition(p.getPosition() + 1);
-                    // performerDao.save(p);
-                    updatedPerformers.add(p);
+                    updatedPerformances.add(p);
                 }
 
-                for (Performer p : updatedPerformers) {
-                    performerDao.save(p);
+                for (Performance p : updatedPerformances) {
+                    performanceDao.save(p);
                 }
 
-                performerToUpdate.setPosition(newPerformer.getPosition());
+                performanceToUpdate.setPosition(newPerformance.getPosition());
 
             } else {
                 // If the updated position is lower on the list (a higher number)
-                Iterable<Performer> performers = performerDao.findAllByPositionBetween(performerToUpdate.getPosition() + 1, newPerformer.getPosition());
-                ArrayList<Performer> updatedPerformers = new ArrayList<>();
-                for (Performer p : performers) {
+                Iterable<Performance> performances = performanceDao.findAllByPositionBetween(performanceToUpdate.getPosition() + 1, newPerformance.getPosition());
+                ArrayList<Performance> updatedPerformances = new ArrayList<>();
+                for (Performance p : performances) {
                     p.setPosition(p.getPosition() - 1);
-                    // performerDao.save(p);
-                    updatedPerformers.add(p);
+                    updatedPerformances.add(p);
                 }
 
-                for (Performer p : updatedPerformers) {
-                    performerDao.save(p);
+                for (Performance p : updatedPerformances) {
+                    performanceDao.save(p);
                 }
 
-                performerToUpdate.setPosition(newPerformer.getPosition());
+                performanceToUpdate.setPosition(newPerformance.getPosition());
             }
         }
 
-        performerDao.save(performerToUpdate);
-
+        performanceDao.save(performanceToUpdate);
 
         return "redirect:..";
     }
 
     @RequestMapping(value = "test")
     public String test(Model model) {
-        model.addAttribute("performers", performerDao.findAllByPositionBetween(5, 1));
+        model.addAttribute("performances", performanceDao.findAllByPositionBetween(5, 1));
         return "test";
     }
 }

@@ -12,12 +12,12 @@
         <th>Id</th>
     </tr>
 
-    <tr th:each="performer : ${performers}">
-        <td th:text="${performer.position}"></td>
-        <td th:text="${performer.name}"></td>
-        <td th:text="${performer.timeAllotted}"></td>
-        <td th:text="${performer.id}"></td>
-        <td><a th:href="@{/edit/{id}(id=${performer.id})}">edit</a></td>
+    <tr th:each="performance : ${performances}">
+        <td th:text="${performance.position}"></td>
+        <td th:text="${performance.name}"></td>
+        <td th:text="${performance.timeAllotted}"></td>
+        <td th:text="${performance.id}"></td>
+        <td><a th:href="@{/edit/{id}(id=${performance.id})}">edit</a></td>
     </tr>
 
 </table>
