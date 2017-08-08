@@ -12,13 +12,18 @@ import java.util.List;
  */
 public interface PerformanceDao extends CrudRepository<Performance, Integer> {
     public Performance findByPosition(int position);
-    public List<Performance> findByPositionGreaterThan(int position);
+    // public List<Performance> findByPositionGreaterThan(int position);
+    public List<Performance> findByPositionGreaterThanAndComedyShow(int position, ComedyShow comedyShow);
+
     public List<Performance> findAllByOrderByPositionAsc();
     // public List<Performance> findByComedyShowByOrderByPositionAsc(ComedyShow comedyShow);
     public List<Performance> findByComedyShowOrderByPositionAsc(ComedyShow comedyShow);
 
     public Performance findById(int id);
     public List<Performance> findAllByPositionBetween(int start, int end);
+    public List<Performance> findAllByPositionBetweenAndComedyShow(int start, int end, ComedyShow comedyShow);
+
+
 
 
 

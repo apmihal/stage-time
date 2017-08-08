@@ -58,6 +58,8 @@ public class ShowManagerController {
                         Model model,
                         @PathVariable int show_id) {
 
+        ComedyShow show = comedyShowDao.findById(show_id);
+
         if (errors.hasErrors()) {
             return "showManager/showManager";
         }
@@ -67,7 +69,7 @@ public class ShowManagerController {
         if (performance != null) {
             // Get list of performances with position greater than or equal to newPerformance position
             // Updates positions of performances below new performance
-            Iterable<Performance> performances = performanceDao.findByPositionGreaterThan(newPerformance.getPosition() - 1);
+            Iterable<Performance> performances = performanceDao.findByPositionGreaterThanAndComedyShow(newPerformance.getPosition() - 1, show);
             ArrayList<Performance> updatedPerformances = new ArrayList<>();
             for (Performance p : performances) {
                 p.setPosition(p.getPosition() + 1);
@@ -96,9 +98,13 @@ public class ShowManagerController {
 
     @RequestMapping(value = "show/{show_id}/edit/{performance_id}", method = RequestMethod.POST)
     public String edit(@PathVariable int performance_id,
+                       @PathVariable int show_id,
                        @ModelAttribute @Valid Performance newPerformance,
                        Errors errors,
                        Model model) {
+
+        ComedyShow show = comedyShowDao.findById(show_id);
+
 
         if (errors.hasErrors()) {
             return "showManager/edit/" + performance_id;
@@ -113,7 +119,7 @@ public class ShowManagerController {
 
             if (performanceToUpdate.getPosition() > newPerformance.getPosition()) {
                 // If the updated position is higher up the list (a lower number)
-                Iterable<Performance> performances = performanceDao.findAllByPositionBetween(newPerformance.getPosition(), performanceToUpdate.getPosition() - 1);
+                Iterable<Performance> performances = performanceDao.findAllByPositionBetweenAndComedyShow(newPerformance.getPosition(), performanceToUpdate.getPosition() - 1, show);
                 ArrayList<Performance> updatedPerformances = new ArrayList<>();
                 for (Performance p : performances) {
                     p.setPosition(p.getPosition() + 1);
@@ -128,7 +134,7 @@ public class ShowManagerController {
 
             } else {
                 // If the updated position is lower on the list (a higher number)
-                Iterable<Performance> performances = performanceDao.findAllByPositionBetween(performanceToUpdate.getPosition() + 1, newPerformance.getPosition());
+                Iterable<Performance> performances = performanceDao.findAllByPositionBetweenAndComedyShow(performanceToUpdate.getPosition() + 1, newPerformance.getPosition(), show);
                 ArrayList<Performance> updatedPerformances = new ArrayList<>();
                 for (Performance p : performances) {
                     p.setPosition(p.getPosition() - 1);
