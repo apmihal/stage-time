@@ -35,14 +35,14 @@ public class ShowManagerController {
     // private ShowDao showDao;
 
     @RequestMapping(value = "show", method = RequestMethod.GET)
-    public String index(Model model) {
+    public String showManager(Model model) {
 
 
         model.addAttribute("performances", performanceDao.findAllByOrderByPositionAsc());
         model.addAttribute("nextPosition", performanceDao.count() + 1);
         model.addAttribute(new Performance());
 
-        return "index";
+        return "showManager/showManager";
     }
 
     @RequestMapping(value = "show", method = RequestMethod.POST)
@@ -51,7 +51,7 @@ public class ShowManagerController {
                         Model model) {
 
         if (errors.hasErrors()) {
-            return "index";
+            return "showManager/showManager";
         }
 
         Performance performance = performanceDao.findOne(newPerformance.getPosition());
@@ -81,7 +81,7 @@ public class ShowManagerController {
         model.addAttribute("message", id);
         model.addAttribute("performance", performanceDao.findById(id));
 
-        return "edit";
+        return "showManager/edit";
     }
 
     @RequestMapping(value = "show/edit/{id}", method = RequestMethod.POST)
@@ -91,7 +91,7 @@ public class ShowManagerController {
                        Model model) {
 
         if (errors.hasErrors()) {
-            return "edit/" + id;
+            return "showManager/edit/" + id;
         }
 
         Performance performanceToUpdate = performanceDao.findById(id);
