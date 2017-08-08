@@ -42,8 +42,9 @@ public class ShowManagerController {
     public String showManager(Model model,
                               @PathVariable int show_id) {
 
+        ComedyShow show = comedyShowDao.findById(show_id);
 
-        model.addAttribute("performances", performanceDao.findAllByOrderByPositionAsc());
+        model.addAttribute("performances", performanceDao.findByComedyShowOrderByPositionAsc(show));
         model.addAttribute("nextPosition", performanceDao.count() + 1);
         model.addAttribute("show_id", show_id);
         model.addAttribute(new Performance());
