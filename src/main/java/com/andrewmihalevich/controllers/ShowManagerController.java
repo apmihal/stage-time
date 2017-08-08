@@ -26,15 +26,15 @@ import java.util.List;
  * Created by AndrewM on 6/20/2017.
  */
 @Controller
-public class StageTimeController {
+public class ShowManagerController {
 
     @Autowired
     private PerformanceDao performanceDao;
 
-    @Autowired
-    private ShowDao showDao;
+    // @Autowired
+    // private ShowDao showDao;
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "show", method = RequestMethod.GET)
     public String index(Model model) {
 
 
@@ -45,7 +45,7 @@ public class StageTimeController {
         return "index";
     }
 
-    @RequestMapping(value = "", method = RequestMethod.POST)
+    @RequestMapping(value = "show", method = RequestMethod.POST)
     public String index(@ModelAttribute @Valid Performance newPerformance,
                         Errors errors,
                         Model model) {
@@ -73,10 +73,10 @@ public class StageTimeController {
         }
 
         performanceDao.save(newPerformance);
-        return "redirect:";
+        return "redirect:/show";
     }
 
-    @RequestMapping(value = "edit/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "show/edit/{id}", method = RequestMethod.GET)
     public String edit(Model model, @PathVariable int id) {
         model.addAttribute("message", id);
         model.addAttribute("performance", performanceDao.findById(id));
@@ -84,7 +84,7 @@ public class StageTimeController {
         return "edit";
     }
 
-    @RequestMapping(value = "edit/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "show/edit/{id}", method = RequestMethod.POST)
     public String edit(@PathVariable int id,
                        @ModelAttribute @Valid Performance newPerformance,
                        Errors errors,
@@ -138,7 +138,7 @@ public class StageTimeController {
         return "redirect:..";
     }
 
-    @RequestMapping(value = "test")
+    @RequestMapping(value = "show/test")
     public String test(Model model) {
         model.addAttribute("performances", performanceDao.findAllByPositionBetween(5, 1));
         return "test";

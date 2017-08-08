@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by AndrewM on 8/4/2017.
  */
-@Entity
+// @Entity
 public class Show {
 
     @Id
@@ -23,9 +23,9 @@ public class Show {
 
     private Date dateAndTime;
 
-    @ManyToOne
-    @JoinColumn(name = "show_id")
-    private List<Performance> performances = new ArrayList<>();
+    // @ManyToOne
+    // @JoinColumn(name = "show_id")
+    // private List<Performance> performances = new ArrayList<>();
 
     public Show(String name, String venue) {
         this.name = name;
