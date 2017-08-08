@@ -72,7 +72,7 @@ public class ShowManagerController {
         }
 
         performanceDao.save(newPerformance);
-        return "redirect:";
+        return "redirect:/show";
     }
 
     @RequestMapping(value = "show/edit/{id}", method = RequestMethod.GET)

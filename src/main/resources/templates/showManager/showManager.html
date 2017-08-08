@@ -42,7 +42,7 @@
         <td th:text="${performance.name}"></td>
         <td th:text="${performance.timeAllotted}"></td>
         <td th:text="${performance.id}"></td>
-        <td><a th:href="@{edit/{id}(id=${performance.id})}">edit</a></td>
+        <td><a th:href="@{http://localhost:8080/show/edit/{id}(id=${performance.id})}">edit</a></td>
     </tr>
 
 </table>
