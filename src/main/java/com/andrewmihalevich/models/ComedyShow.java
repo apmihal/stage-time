@@ -1,11 +1,11 @@
 package com.andrewmihalevich.models;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by AndrewM on 8/4/2017.
@@ -24,6 +24,10 @@ public class ComedyShow {
     @NotNull
     @Size(min=3, max=25)
     private String Venue;
+
+    @OneToMany
+    @JoinColumn(name = "show_id")
+    private List<Performance> performances = new ArrayList<>();
 
     public ComedyShow() { }
 

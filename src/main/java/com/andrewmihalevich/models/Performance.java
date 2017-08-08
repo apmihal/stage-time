@@ -29,8 +29,8 @@ public class Performance {
     @NotNull
     private int timeAllotted;
 
-    // @OneToMany
-    // private Show show;
+    @ManyToOne
+    private ComedyShow comedyShow;
 
     public Performance() { }
 
