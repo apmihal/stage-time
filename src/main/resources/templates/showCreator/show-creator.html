@@ -29,12 +29,14 @@
         <th>Name</th>
         <th>Venue</th>
         <th>Id</th>
+        <th>Manage</th>
     </tr>
 
     <tr th:each="comedyShow : ${comedyShows}">
         <td th:text="${comedyShow.name}"></td>
         <td th:text="${comedyShow.venue}"></td>
         <td th:text="${comedyShow.id}"></td>
+        <td><a th:href="@{http://localhost:8080/show/{id}(id=${comedyShow.id})}">manage</a></td>
     </tr>
 
 </table>

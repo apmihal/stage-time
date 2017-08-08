@@ -1,8 +1,10 @@
 package com.andrewmihalevich.controllers;
 
 import com.andrewmihalevich.HibernateUtil;
+import com.andrewmihalevich.models.ComedyShow;
 import com.andrewmihalevich.models.Performance;
 import com.andrewmihalevich.models.Performance;
+import com.andrewmihalevich.models.data.ComedyShowDao;
 import com.andrewmihalevich.models.data.PerformanceDao;
 import com.andrewmihalevich.models.data.PerformanceDao;
 import org.apache.catalina.Session;
@@ -30,24 +32,30 @@ public class ShowManagerController {
     @Autowired
     private PerformanceDao performanceDao;
 
+    @Autowired
+    private ComedyShowDao comedyShowDao;
+
     // @Autowired
     // private ShowDao showDao;
 
-    @RequestMapping(value = "show", method = RequestMethod.GET)
-    public String showManager(Model model) {
+    @RequestMapping(value = "show/{show_id}", method = RequestMethod.GET)
+    public String showManager(Model model,
+                              @PathVariable int show_id) {
 
 
         model.addAttribute("performances", performanceDao.findAllByOrderByPositionAsc());
         model.addAttribute("nextPosition", performanceDao.count() + 1);
+        model.addAttribute("show_id", show_id);
         model.addAttribute(new Performance());
 
         return "showManager/showManager";
     }
 
-    @RequestMapping(value = "show", method = RequestMethod.POST)
+    @RequestMapping(value = "show/{show_id}", method = RequestMethod.POST)
     public String index(@ModelAttribute @Valid Performance newPerformance,
                         Errors errors,
-                        Model model) {
+                        Model model,
+                        @PathVariable int show_id) {
 
         if (errors.hasErrors()) {
             return "showManager/showManager";
@@ -71,29 +79,31 @@ public class ShowManagerController {
             }
         }
 
+        ComedyShow comedyShow = comedyShowDao.findOne(show_id);
+        newPerformance.setComedyShow(comedyShow);
         performanceDao.save(newPerformance);
-        return "redirect:/show";
+        return "redirect:/show/" + show_id;
     }
 
-    @RequestMapping(value = "show/edit/{id}", method = RequestMethod.GET)
-    public String edit(Model model, @PathVariable int id) {
-        model.addAttribute("message", id);
-        model.addAttribute("performance", performanceDao.findById(id));
+    @RequestMapping(value = "show/{show_id}/edit/{performance_id}", method = RequestMethod.GET)
+    public String edit(Model model, @PathVariable int performance_id) {
+        model.addAttribute("message", performance_id);
+        model.addAttribute("performance", performanceDao.findById(performance_id));
 
         return "showManager/edit";
     }
 
-    @RequestMapping(value = "show/edit/{id}", method = RequestMethod.POST)
-    public String edit(@PathVariable int id,
+    @RequestMapping(value = "show/{show_id}/edit/{performance_id}", method = RequestMethod.POST)
+    public String edit(@PathVariable int performance_id,
                        @ModelAttribute @Valid Performance newPerformance,
                        Errors errors,
                        Model model) {
 
         if (errors.hasErrors()) {
-            return "showManager/edit/" + id;
+            return "showManager/edit/" + performance_id;
         }
 
-        Performance performanceToUpdate = performanceDao.findById(id);
+        Performance performanceToUpdate = performanceDao.findById(performance_id);
 
         performanceToUpdate.setName(newPerformance.getName());
         performanceToUpdate.setTimeAllotted(newPerformance.getTimeAllotted());

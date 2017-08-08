@@ -62,6 +62,14 @@ public class Performance {
         this.timeAllotted = timeAllotted;
     }
 
+    public ComedyShow getComedyShow() {
+        return comedyShow;
+    }
+
+    public void setComedyShow(ComedyShow comedyShow) {
+        this.comedyShow = comedyShow;
+    }
+
     public int compareTo(Performance comparePerformance) {
         int compareQuantity = comparePerformance.getPosition();
 
