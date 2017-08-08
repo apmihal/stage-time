@@ -12,7 +12,7 @@
         <span th:errors="*{name}" class="error"></span>
     </div>
 
-    <input type="submit" value="Add Test" />
+    <input type="submit" value="Add Performance" />
 </form>
 
 <p th:if="${testError}" th:text="${testError}"></p>
@@ -28,6 +28,7 @@
         <td th:text="${test.name}"></td>
         <td th:text="${test.id}"></td>
     </tr>
+
 </table>
 
 </body>

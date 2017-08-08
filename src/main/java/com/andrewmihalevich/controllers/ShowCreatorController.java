@@ -36,7 +36,7 @@ public class ShowCreatorController {
                                Model model) {
 
         if (errors.hasErrors()) {
-            return "showManager/showManager";
+            return "showCreator/show-creator";
         }
 
         showDao.save(newShow);
