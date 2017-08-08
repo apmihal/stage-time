@@ -23,8 +23,8 @@ public class Show {
 
     private Date dateAndTime;
 
-    // @ManyToOne
-    // @JoinColumn(name = "show_id")
+    @ManyToOne
+    @JoinColumn(name = "show_id")
     private List<Performance> performances = new ArrayList<>();
 
     public Show(String name, String venue) {

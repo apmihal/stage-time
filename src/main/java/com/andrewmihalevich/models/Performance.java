@@ -29,8 +29,8 @@ public class Performance {
     @NotNull
     private int timeAllotted;
 
-    // @OneToMany
-    // private Show show;
+    @OneToMany
+    private Show show;
 
     public Performance(String name, int position, int timeAllotted) {
         this.name = name;

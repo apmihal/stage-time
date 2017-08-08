@@ -5,6 +5,7 @@ import com.andrewmihalevich.models.Performance;
 import com.andrewmihalevich.models.Performance;
 import com.andrewmihalevich.models.data.PerformanceDao;
 import com.andrewmihalevich.models.data.PerformanceDao;
+import com.andrewmihalevich.models.data.ShowDao;
 import org.apache.catalina.Session;
 import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +31,12 @@ public class StageTimeController {
     @Autowired
     private PerformanceDao performanceDao;
 
+    @Autowired
+    private ShowDao showDao;
+
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(Model model) {
+
 
         model.addAttribute("performances", performanceDao.findAllByOrderByPositionAsc());
         model.addAttribute("nextPosition", performanceDao.count() + 1);
