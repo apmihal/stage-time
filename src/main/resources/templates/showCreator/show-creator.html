@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<h1>Create a show.</h1>
+
+<form method="post" th:object="${show}">
+    <div class="form-group">
+        <label th:for="showName">Name</label>
+        <input class="form-control" th:field="*{showName}" />
+        <span th:errors="*{showName}" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label th:for="venue">Venue</label>
+        <input class="form-control" th:field="*{showVenue}" />
+        <span th:errors="*{showVenue}" class="error"></span>
+    </div>
+
+    <input type="submit" value="Create Show" />
+</form>
+
+<p th:if="${testError}" th:text="${testError}"></p>
+
+<table class="table">
+
+    <tr>
+        <th>Name</th>
+        <th>Venue</th>
+        <th>Id</th>
+    </tr>
+
+    <tr th:each="show : ${shows}">
+        <td th:text="${show.showName}"></td>
+        <td th:text="${show.showVenue}"></td>
+        <td th:text="${show.showId}"></td>
+    </tr>
+
+</table>
+
+</body>
+</html>

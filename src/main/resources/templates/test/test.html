@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<h1>Test</h1>
+
+<form method="post" th:object="${test}">
+    <div class="form-group">
+        <label th:for="name">Name</label>
+        <input class="form-control" th:field="*{name}" />
+        <span th:errors="*{name}" class="error"></span>
+    </div>
+
+    <input type="submit" value="Add Test" />
+</form>
+
+<p th:if="${testError}" th:text="${testError}"></p>
+
+<table class="table">
+
+    <tr>
+        <th>Name</th>
+        <th>Id</th>
+    </tr>
+
+    <tr th:each="test : ${tests}">
+        <td th:text="${test.name}"></td>
+        <td th:text="${test.id}"></td>
+    </tr>
+</table>
+
+</body>
+</html>

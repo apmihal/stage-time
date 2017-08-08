@@ -3,6 +3,8 @@ package com.andrewmihalevich.models;
 import com.andrewmihalevich.models.Performance;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,29 +12,46 @@ import java.util.List;
 /**
  * Created by AndrewM on 8/4/2017.
  */
-// @Entity
+@Entity
 public class Show {
 
     @Id
     @GeneratedValue
-    private int id;
+    private int showId;
 
-    private String name;
+    @Size(min=3, max=25)
+    @NotNull
+    private String showName;
 
-    private String venue;
+    @Size(min=3, max=25)
+    @NotNull
+    private String showVenue;
 
-    private Date dateAndTime;
+    // private Date dateAndTime;
 
     // @ManyToOne
     // @JoinColumn(name = "show_id")
     // private List<Performance> performances = new ArrayList<>();
 
-    public Show(String name, String venue) {
-        this.name = name;
-        this.venue = venue;
-    }
-
     public Show() {}
 
+    public int getShowId() {
+        return showId;
+    }
 
+    public String getShowName() {
+        return showName;
+    }
+
+    public void setShowName(String showName) {
+        this.showName = showName;
+    }
+
+    public String getShowVenue() {
+        return showVenue;
+    }
+
+    public void setShowVenue(String showVenue) {
+        this.showVenue = showVenue;
+    }
 }
