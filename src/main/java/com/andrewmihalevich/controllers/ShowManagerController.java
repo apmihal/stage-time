@@ -5,7 +5,6 @@ import com.andrewmihalevich.models.Performance;
 import com.andrewmihalevich.models.Performance;
 import com.andrewmihalevich.models.data.PerformanceDao;
 import com.andrewmihalevich.models.data.PerformanceDao;
-import com.andrewmihalevich.models.data.ShowDao;
 import org.apache.catalina.Session;
 import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;

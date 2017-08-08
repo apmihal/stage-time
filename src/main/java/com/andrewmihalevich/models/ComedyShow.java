@@ -1,6 +1,7 @@
 package com.andrewmihalevich.models;
 
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
@@ -9,8 +10,8 @@ import javax.validation.constraints.Size;
 /**
  * Created by AndrewM on 8/4/2017.
  */
-// @Entity
-public class Show {
+@Entity
+public class ComedyShow {
 
     @Id
     @GeneratedValue
@@ -24,7 +25,7 @@ public class Show {
     @Size(min=3, max=25)
     private String Venue;
 
-    public Show() { }
+    public ComedyShow() { }
 
     public int getId() {
         return id;
