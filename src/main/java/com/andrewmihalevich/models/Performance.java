@@ -32,12 +32,6 @@ public class Performance {
     // @OneToMany
     // private Show show;
 
-    public Performance(String name, int position, int timeAllotted) {
-        this.name = name;
-        this.position = position;
-        this.timeAllotted = timeAllotted;
-    }
-
     public Performance() { }
 
     public int getId() {

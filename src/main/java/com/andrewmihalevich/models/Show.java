@@ -1,11 +1,10 @@
 package com.andrewmihalevich.models;
 
-import com.andrewmihalevich.models.Performance;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Created by AndrewM on 8/4/2017.
@@ -17,22 +16,33 @@ public class Show {
     @GeneratedValue
     private int id;
 
+    @NotNull
+    @Size(min=3, max=25)
     private String name;
 
-    private String venue;
+    @NotNull
+    @Size(min=3, max=25)
+    private String Venue;
 
-    private Date dateAndTime;
+    public Show() { }
 
-    // @ManyToOne
-    // @JoinColumn(name = "show_id")
-    // private List<Performance> performances = new ArrayList<>();
-
-    public Show(String name, String venue) {
-        this.name = name;
-        this.venue = venue;
+    public int getId() {
+        return id;
     }
 
-    public Show() {}
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    public String getVenue() {
+        return Venue;
+    }
+
+    public void setVenue(String venue) {
+        Venue = venue;
+    }
 }
