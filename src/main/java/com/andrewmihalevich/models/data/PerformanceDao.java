@@ -23,6 +23,8 @@ public interface PerformanceDao extends CrudRepository<Performance, Integer> {
     public List<Performance> findAllByPositionBetween(int start, int end);
     public List<Performance> findAllByPositionBetweenAndComedyShow(int start, int end, ComedyShow comedyShow);
 
+    public List<Performance> findByComedyShow(ComedyShow comedyShow);
+
 
 
 

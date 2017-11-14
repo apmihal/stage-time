@@ -45,7 +45,7 @@ public class ShowManagerController {
         ComedyShow show = comedyShowDao.findById(show_id);
 
         model.addAttribute("performances", performanceDao.findByComedyShowOrderByPositionAsc(show));
-        model.addAttribute("nextPosition", performanceDao.count() + 1);
+        model.addAttribute("nextPosition", performanceDao.findByComedyShow(show).size() + 1);
         model.addAttribute("show_id", show_id);
         model.addAttribute(new Performance());
 
