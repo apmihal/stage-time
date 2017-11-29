@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 /**
@@ -42,6 +43,8 @@ public class ComedyShowCreatorController {
 
         comedyShowDao.save(newComedyShow);
         return "redirect:/create";
+
+
 
     }
 
