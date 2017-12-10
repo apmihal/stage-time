@@ -15,7 +15,14 @@
     <div class="form-group">
         <label th:for="position">Position</label>
         <!--<input class="form-control" th:field="*{position}" />-->
-        <input class="form-control" th:value="${nextPosition}" th:name="position" th:id="position" />
+        <!--<input class="form-control" th:value="${nextPosition}" th:name="position" th:id="position" />-->
+        <select class="form-control" th:field="*{position}">
+            <option th:each="i : ${#numbers.sequence(#lists.size(performances)+1,1,-1)}"
+                    th:value="${i}"
+                    th:name="position"
+                    th:id="position"
+                    th:text="${i}"></option>
+        </select>
         <span th:errors="*{position}" class="error"></span>
     </div>
     <div class="form-group">
@@ -23,6 +30,14 @@
         <input class="form-control" th:field="*{timeAllotted}" />
         <span th:errors="*{timeAllotted}" class="error"></span>
     </div>
+
+    <!--<select>-->
+        <!--<option th:each="i : ${#numbers.sequence(1, #lists.size(performances)+1)}" th:value="${i}" th:text="${i}"></option>-->
+    <!--</select>-->
+
+
+
+    <!--<h1 th:text="${#lists.size(performances)}"></h1>-->
 
     <input type="submit" value="Add Performance" />
 </form>
