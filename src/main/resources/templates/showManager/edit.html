@@ -29,12 +29,14 @@
         <input class="form-control" th:value="${performance.name}" th:name="name" th:id="name" />
         <span th:errors="*{name}" class="error"></span>
     </div>
-    <!--Uncomment when ready to handle updated positions-->
-    <div class="form-group">
-        <label th:for="position">Position</label>
-        <input class="form-control" th:value="${performance.position}" th:name="position" th:id="position" />
-        <span th:errors="*{position}" class="error"></span>
-    </div>
+    <select class="form-control" th:field="*{position}">
+        <option th:each="i : ${#numbers.sequence(#lists.size(performances),1,-1)}"
+                th:value="${i}"
+                th:name="position"
+                th:id="position"
+                th:text="${i}"></option>
+    </select>
+    <span th:errors="*{position}" class="error"></span>
     <div class="form-group">
         <label th:for="timeAllotted">Time Allotted</label>
         <input class="form-control" th:value="${performance.timeAllotted}" th:name="timeAllotted" th:id="timeAllotted" />

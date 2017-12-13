@@ -45,7 +45,6 @@ public class ShowManagerController {
         ComedyShow show = comedyShowDao.findById(show_id);
 
         model.addAttribute("performances", performanceDao.findByComedyShowOrderByPositionAsc(show));
-        model.addAttribute("nextPosition", performanceDao.findByComedyShow(show).size() + 1);
         model.addAttribute("show_id", show_id);
         model.addAttribute(new Performance());
 
@@ -89,9 +88,17 @@ public class ShowManagerController {
     }
 
     @RequestMapping(value = "show/{show_id}/edit/{performance_id}", method = RequestMethod.GET)
-    public String edit(Model model, @PathVariable int performance_id) {
+    public String edit(Model model,
+                       @PathVariable int performance_id,
+                       @PathVariable int show_id) {
+
+        ComedyShow show = comedyShowDao.findById(show_id);
+
+
         model.addAttribute("message", performance_id);
         model.addAttribute("performance", performanceDao.findById(performance_id));
+        model.addAttribute("performances", performanceDao.findByComedyShowOrderByPositionAsc(show));
+
 
         return "showManager/edit";
     }

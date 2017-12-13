@@ -14,8 +14,6 @@
     </div>
     <div class="form-group">
         <label th:for="position">Position</label>
-        <!--<input class="form-control" th:field="*{position}" />-->
-        <!--<input class="form-control" th:value="${nextPosition}" th:name="position" th:id="position" />-->
         <select class="form-control" th:field="*{position}">
             <option th:each="i : ${#numbers.sequence(#lists.size(performances)+1,1,-1)}"
                     th:value="${i}"
