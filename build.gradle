@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '1.5.4.RELEASE'
+		springBootVersion = '1.5.5.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -29,6 +29,7 @@ dependencies {
 	runtime('org.springframework.boot:spring-boot-devtools')
 	runtime('mysql:mysql-connector-java')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+	compile('org.springframework.security:spring-security-crypto')
 }
 
 bootRun {
