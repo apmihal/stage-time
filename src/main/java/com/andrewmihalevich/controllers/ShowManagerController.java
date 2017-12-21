@@ -1,14 +1,9 @@
 package com.andrewmihalevich.controllers;
 
-import com.andrewmihalevich.HibernateUtil;
 import com.andrewmihalevich.models.ComedyShow;
-import com.andrewmihalevich.models.Performance;
 import com.andrewmihalevich.models.Performance;
 import com.andrewmihalevich.models.data.ComedyShowDao;
 import com.andrewmihalevich.models.data.PerformanceDao;
-import com.andrewmihalevich.models.data.PerformanceDao;
-import org.apache.catalina.Session;
-import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Created by AndrewM on 6/20/2017.
