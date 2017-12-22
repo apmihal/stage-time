@@ -20,13 +20,13 @@ import java.util.ArrayList;
  * Created by AndrewM on 6/20/2017.
  */
 @Controller
-public class ShowManagerController {
+public class ShowManagerController extends AbstractController {
 
-    @Autowired
-    private PerformanceDao performanceDao;
-
-    @Autowired
-    private ComedyShowDao comedyShowDao;
+//    @Autowired
+//    private PerformanceDao performanceDao;
+//
+//    @Autowired
+//    private ComedyShowDao comedyShowDao;
 
     // @Autowired
     // private ShowDao showDao;
