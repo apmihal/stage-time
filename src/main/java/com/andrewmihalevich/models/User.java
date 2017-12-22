@@ -3,7 +3,9 @@ package com.andrewmihalevich.models;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.List;
@@ -21,6 +23,10 @@ public class User extends AbstractEntity {
 
 //    @ManyToMany
 //    private List<Dog> dogs;
+
+    @OneToMany
+    @JoinColumn(name = "uid")
+    private List<ComedyShow> comedyShows;
 
     public User() {}
 
@@ -52,6 +58,14 @@ public class User extends AbstractEntity {
 //    public void addDog(Dog dog) {
 //        this.dogs.add(dog);
 //    }
+
+    public List<ComedyShow> getComedyShows() {
+        return comedyShows;
+    }
+
+    public void addComedyShow(ComedyShow comedyShow) {
+        this.comedyShows.add(comedyShow);
+    }
 
 
 }

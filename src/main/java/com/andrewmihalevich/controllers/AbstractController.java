@@ -1,6 +1,8 @@
 package com.andrewmihalevich.controllers;
 
 import com.andrewmihalevich.models.User;
+import com.andrewmihalevich.models.data.ComedyShowDao;
+import com.andrewmihalevich.models.data.PerformanceDao;
 import com.andrewmihalevich.models.data.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,6 +19,12 @@ public abstract class AbstractController {
      * Other DAOs can be autowired here and they'll be available
      * to all classes extending AbstractController
      * */
+
+    @Autowired
+    protected ComedyShowDao comedyShowDao;
+
+    @Autowired
+    protected PerformanceDao performanceDao;
 
 
     public static final String userSessionKey = "user_id";
