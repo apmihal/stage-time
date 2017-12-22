@@ -4,7 +4,8 @@
 <body class="container">
 
 <h1>Stage Time</h1>
-<a th:href="@{/create}">Shows</a>
+<!--<a th:href="@{/create}">Shows</a>-->
+<nav th:replace="fragments :: navigation"></nav>
 
 <form method="post" th:object="${performance}">
     <div class="form-group">

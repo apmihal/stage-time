@@ -29,6 +29,9 @@ public class ComedyShow {
     @JoinColumn(name = "show_id")
     private List<Performance> performances = new ArrayList<>();
 
+    @ManyToOne
+    private User user;
+
     public ComedyShow() { }
 
     public int getId() {
@@ -49,5 +52,13 @@ public class ComedyShow {
 
     public void setVenue(String venue) {
         Venue = venue;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
