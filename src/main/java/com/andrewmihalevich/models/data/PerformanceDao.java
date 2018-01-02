@@ -25,6 +25,8 @@ public interface PerformanceDao extends CrudRepository<Performance, Integer> {
 
     public List<Performance> findByComedyShow(ComedyShow comedyShow);
 
+    public void deleteById(int id);
+
 
 
 

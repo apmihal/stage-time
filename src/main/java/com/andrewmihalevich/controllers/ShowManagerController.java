@@ -6,6 +6,7 @@ import com.andrewmihalevich.models.data.ComedyShowDao;
 import com.andrewmihalevich.models.data.PerformanceDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -159,6 +160,17 @@ public class ShowManagerController extends AbstractController {
         model.addAttribute("performances", performanceDao.findAllByPositionBetween(5, 1));
         return "test";
     }
+
+    @RequestMapping(value = "show/{show_id}/edit/{performance_id}/remove", method = RequestMethod.GET)
+    public String remove(@PathVariable int performance_id,
+                         Model model) {
+
+        performanceDao.delete(performanceDao.findById(performance_id));
+
+        return "redirect:../..";
+    }
+
+
 }
 
 
