@@ -155,12 +155,6 @@ public class ShowManagerController extends AbstractController {
         return "redirect:..";
     }
 
-    @RequestMapping(value = "show/test")
-    public String test(Model model) {
-        model.addAttribute("performances", performanceDao.findAllByPositionBetween(5, 1));
-        return "test";
-    }
-
     @RequestMapping(value = "show/{show_id}/edit/{performance_id}/remove", method = RequestMethod.GET)
     public String remove(@PathVariable int performance_id,
                          Model model) {

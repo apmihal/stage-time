@@ -1,40 +1,57 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:fragment="head">
-    <meta charset="UTF-8"/>
-    <title th:text="${title}">My Cheeses</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous" />
 
 </head>
+
 <body>
 
-<div th:fragment="navigation">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navigation" th:if="${user}">
 
-    <div th:if="${user}">
-
-        <!-- Nav section for logged-in users -->
-
-        <nav class="user-nav">
-            <a href="/logout">Log Out</a>
-            <a href="/create">Create Show</a>
-        </nav>
-
+    <a class="navbar-brand" href="#">Stage Time</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="/create">Create Show <span class="sr-only">(current)</span></a>
+        </div>
+        <div class="navbar-nav ml-auto">
+            <!--TODO: display logged in username-->
+            <a class="nav-item nav-link" href="/logout">Log Out</a>
+        </div>
     </div>
 
-    <div th:unless="${user}">
+</nav>
 
-        <!-- Nav section for users that aren't logged in -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navigation" th:unless="${user}">
 
-        <nav>
-            <a href="/login">Log In</a> |
-            <a href="/register">Register</a>
-        </nav>
-
+    <a class="navbar-brand" href="#">Stage Time</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ml-auto">
+            <a class="nav-item nav-link" href="/register">Register</a>
+            <a class="nav-item nav-link" href="/login">Log In</a>
+        </div>
     </div>
 
+</nav>
+
+<div th:fragment="bootstrap-js">
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
 </div>
-
 </body>
 </html>

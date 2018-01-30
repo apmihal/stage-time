@@ -87,4 +87,9 @@ public class AuthenticationController extends AbstractController {
         return "redirect:/login";
     }
 
+    @RequestMapping(value = "test")
+    public String test(Model model) {
+        return "test";
+    }
+
 }
