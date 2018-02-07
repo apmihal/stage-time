@@ -1,56 +1,62 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body class="container">
+<body>
 
-<h1 th:text="${message}">testing</h1>
-
+<!--TODO: replace with a message telling the user who they are editing-->
 <nav th:replace="fragments :: navigation"></nav>
 
+<div class="container">
+    <h1 th:text="${message}">testing</h1>
 
-<table class="table">
 
-    <tr>
-        <th>Position</th>
-        <th>Name</th>
-        <th>Time Allotted</th>
-        <th>Id</th>
-    </tr>
 
-    <tr>
-        <td th:text="${performance.position}"></td>
-        <td th:text="${performance.name}"></td>
-        <td th:text="${performance.timeAllotted}"></td>
-        <td th:text="${performance.id}"></td>
-    </tr>
+    <table class="table">
 
-</table>
+        <tr>
+            <th>Position</th>
+            <th>Name</th>
+            <th>Time Allotted</th>
+            <th>Id</th>
+        </tr>
 
-<form method="post" th:object="${performance}">
-    <div class="form-group">
-        <label th:for="name">Name</label>
-        <input class="form-control" th:value="${performance.name}" th:name="name" th:id="name" />
-        <span th:errors="*{name}" class="error"></span>
-    </div>
-    <select class="form-control" th:field="*{position}">
-        <option th:each="i : ${#numbers.sequence(#lists.size(performances),1,-1)}"
-                th:value="${i}"
-                th:name="position"
-                th:id="position"
-                th:text="${i}"></option>
-    </select>
-    <span th:errors="*{position}" class="error"></span>
-    <div class="form-group">
-        <label th:for="timeAllotted">Time Allotted</label>
-        <input class="form-control" th:value="${performance.timeAllotted}" th:name="timeAllotted" th:id="timeAllotted" />
-        <span th:errors="*{timeAllotted}" class="error"></span>
-    </div>
+        <tr>
+            <td th:text="${performance.position}"></td>
+            <td th:text="${performance.name}"></td>
+            <td th:text="${performance.timeAllotted}"></td>
+            <td th:text="${performance.id}"></td>
+        </tr>
 
-    <input type="submit" value="Edit Performance" />
+    </table>
 
-</form>
+    <form method="post" th:object="${performance}">
+        <div class="form-group">
+            <label th:for="name">Name</label>
+            <input class="form-control" th:value="${performance.name}" th:name="name" th:id="name" />
+            <span th:errors="*{name}" class="error"></span>
+        </div>
+        <select class="form-control" th:field="*{position}">
+            <option th:each="i : ${#numbers.sequence(#lists.size(performances),1,-1)}"
+                    th:value="${i}"
+                    th:name="position"
+                    th:id="position"
+                    th:text="${i}"></option>
+        </select>
+        <span th:errors="*{position}" class="error"></span>
+        <div class="form-group">
+            <label th:for="timeAllotted">Time Allotted</label>
+            <input class="form-control" th:value="${performance.timeAllotted}" th:name="timeAllotted" th:id="timeAllotted" />
+            <span th:errors="*{timeAllotted}" class="error"></span>
+        </div>
 
-<a th:href="@{http://localhost:8080/show/{show_id}/edit/{id}/remove(show_id=${show_id}, id=${performance.id})}">Remove Performance</a>
+        <input type="submit" value="Edit Performance" />
 
+    </form>
+
+    <a th:href="@{http://localhost:8080/show/{show_id}/edit/{id}/remove(show_id=${show_id}, id=${performance.id})}">Remove Performance</a>
+
+</div>
+
+<div th:replace="fragments :: bootstrap-js"></div>
 </body>
 </html>

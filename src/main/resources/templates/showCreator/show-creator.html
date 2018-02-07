@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body class="container">
-
-<h1>Create Show</h1>
+<body>
 
 <nav th:replace="fragments :: navigation"></nav>
 
+<div class="container">
+
+<h1>Create Show</h1>
 
 <form method="post" th:object="${comedyShow}">
     <div class="form-group">
@@ -28,21 +29,26 @@
 
 <table class="table">
 
+    <!--TODO: display number of performers on shows-->
     <tr>
         <th>Name</th>
         <th>Venue</th>
-        <th>Id</th>
+        <th>Number of Performers</th>
         <th>Manage</th>
     </tr>
 
     <tr th:each="comedyShow : ${comedyShows}">
         <td th:text="${comedyShow.name}"></td>
         <td th:text="${comedyShow.venue}"></td>
-        <td th:text="${comedyShow.id}"></td>
+        <td th:text="${#lists.size(comedyShow.performances)}"></td>
         <td><a th:href="@{http://localhost:8080/show/{id}(id=${comedyShow.id})}">manage</a></td>
     </tr>
 
 </table>
+
+</div>
+
+<div th:replace="fragments :: bootstrap-js"></div>
 
 </body>
 </html>
