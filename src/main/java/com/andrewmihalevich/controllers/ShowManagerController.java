@@ -77,6 +77,7 @@ public class ShowManagerController extends AbstractController {
 
         ComedyShow comedyShow = comedyShowDao.findOne(show_id);
         newPerformance.setComedyShow(comedyShow);
+        comedyShow.addPerformance(newPerformance);
         performanceDao.save(newPerformance);
         return "redirect:/show/" + show_id;
     }
@@ -157,9 +158,14 @@ public class ShowManagerController extends AbstractController {
 
     @RequestMapping(value = "show/{show_id}/edit/{performance_id}/remove", method = RequestMethod.GET)
     public String remove(@PathVariable int performance_id,
+                         @PathVariable int show_id,
                          Model model) {
 
-        performanceDao.delete(performanceDao.findById(performance_id));
+
+        ComedyShow comedyShow = comedyShowDao.findOne(show_id);
+        Performance performance = performanceDao.findById(performance_id);
+        comedyShow.removePerformance(performance);
+        performanceDao.delete(performance);
 
         return "redirect:../..";
     }

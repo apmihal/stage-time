@@ -54,6 +54,18 @@ public class ComedyShow {
         Venue = venue;
     }
 
+    public List<Performance> getPerformances() {
+        return performances;
+    }
+
+    public void addPerformance(Performance performance) {
+        this.performances.add(performance);
+    }
+
+    public void removePerformance(Performance performance) {
+        this.performances.remove(performance);
+    }
+
     public User getUser() {
         return user;
     }
