@@ -88,10 +88,9 @@ public class ShowManagerController extends AbstractController {
                        @PathVariable int show_id) {
 
         ComedyShow show = comedyShowDao.findById(show_id);
+        Performance performance = performanceDao.findById(performance_id);
 
-
-        model.addAttribute("message", performance_id);
-        model.addAttribute("performance", performanceDao.findById(performance_id));
+        model.addAttribute("performance", performance);
         model.addAttribute("performances", performanceDao.findByComedyShowOrderByPositionAsc(show));
 
 
