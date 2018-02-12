@@ -1,0 +1,4 @@
+applications:
+- name: stage-time
+  buildpack: java_buildpack
+  path: build/libs/stage-time-0.0.1-SNAPSHOT.jar
