@@ -40,7 +40,7 @@
         <td th:text="${comedyShow.name}"></td>
         <td th:text="${comedyShow.venue}"></td>
         <td th:text="${#lists.size(comedyShow.performances)}"></td>
-        <td><a th:href="@{http://localhost:8080/show/{id}(id=${comedyShow.id})}">manage</a></td>
+        <td><a th:href="@{/show/{id}(id=${comedyShow.id})}">manage</a></td>
     </tr>
 
 </table>
