@@ -4,7 +4,9 @@ package com.andrewmihalevich.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,6 +33,9 @@ public class ComedyShow {
 
     @ManyToOne
     private User user;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateTime;
 
     public ComedyShow() { }
 
@@ -72,5 +77,13 @@ public class ComedyShow {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Date getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(Date dateTime) {
+        this.dateTime = dateTime;
     }
 }
